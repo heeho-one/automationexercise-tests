@@ -1,5 +1,7 @@
 import { test } from "../e2e/fixtures/page.fixture";
-import { TestDataUtils } from "../e2e/utils/test-data.utils";
+import { APITestDataUtils } from "../e2e/utils/api-test-data.utils";
+import { APIUtils } from "../e2e/utils/api.utils";
+import { UITestDataUtils } from "../e2e/utils/ui-test-data.utils";
 
 test.describe("User Registration", () => {
     test("should register a new user", async ({ page, homePage, navBarPage, registrationPage, accountInformationPage, messagePage }) => {
@@ -9,7 +11,7 @@ test.describe("User Registration", () => {
         await navBarPage.navigateToSignupLogin();
         await registrationPage.verifySectionHeaderIsVisible();
 
-        let userInfo = TestDataUtils.generateRandomUserAccountInformation();
+        let userInfo = UITestDataUtils.generateRandomUserAccountInformation();
         await registrationPage.signup(userInfo.name, userInfo.email);
 
         await accountInformationPage.verifySectionHeaderIsVisible();

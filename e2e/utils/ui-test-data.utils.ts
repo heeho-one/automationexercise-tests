@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { UserAccountInformation } from '../interfaces/ui/user-account-information';
 
-export class TestDataUtils {
+export class UITestDataUtils {
 
     static generateRandomUserAccountInformation(): UserAccountInformation {
         return {
