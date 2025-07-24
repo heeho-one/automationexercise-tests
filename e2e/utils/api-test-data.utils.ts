@@ -1,11 +1,10 @@
 import { faker } from '@faker-js/faker';
-import { UserAccountInformation } from '../interfaces/ui/user-account-information';
 import { RegisterRequest } from '../interfaces/api/register-request.interface';
 
 export class APITestDataUtils {
 
-    static generateRegisterUserPayload(): FormData {
-        const userInfo = {
+    static generateRegisterUserPayload(): RegisterRequest {
+        return  {
             name: faker.person.fullName(),
             email: faker.internet.email(),
             title: faker.helpers.arrayElement(['Mr', 'Mrs']),
@@ -25,13 +24,16 @@ export class APITestDataUtils {
             mobile_number: faker.phone.number(),
         }
 
+    }
+
+    static convertToFormData(generatedTestData: Record<string, any>): FormData {
         let form = new FormData();
 
-        for (const key in userInfo) {
-            form.set(key, userInfo[key]);
+        for (const key in generatedTestData) {
+            form.set(key, generatedTestData[key]);
         }
 
-        return form
+        return form;
     }
 
 }
