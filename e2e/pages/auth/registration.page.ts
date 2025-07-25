@@ -5,6 +5,7 @@ export class RegistrationPage {
     private readonly nameInput: Locator;
     private readonly emailInput: Locator;
     private readonly signupButton: Locator;
+    private readonly errorMessage: Locator;
     
 
     constructor(private page: Page) {
@@ -12,6 +13,7 @@ export class RegistrationPage {
         this.nameInput = this.page.getByTestId('signup-name');
         this.emailInput = this.page.getByTestId('signup-email');
         this.signupButton = this.page.getByTestId('signup-button');
+        this.errorMessage = this.page.getByText('Email Address already exist!', { exact: true });
     }
 
     async signup(name: string, email: string): Promise<void> {
@@ -22,5 +24,11 @@ export class RegistrationPage {
 
     async verifySectionHeaderIsVisible(): Promise<void> {
         await expect(this.sectionHeader).toBeVisible();
+    }
+
+    async verifyErrorMessageIsVisible(): Promise<void> {
+        await expect(this.errorMessage).toBeVisible();
+        await expect(this.errorMessage).toHaveText('Email Address already exist!');
+        await expect(this.errorMessage).toHaveCSS('color', 'rgb(255, 0, 0)');
     }
 }

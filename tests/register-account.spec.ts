@@ -1,4 +1,5 @@
-import { test } from "../e2e/fixtures/page.fixture";
+import { test } from "../e2e/fixtures/fixtures";
+import { APITestDataUtils } from "../e2e/utils/api-test-data.utils";
 import { UITestDataUtils } from "../e2e/utils/ui-test-data.utils";
 
 test.describe("User Registration", () => {
@@ -24,6 +25,20 @@ test.describe("User Registration", () => {
         await messagePage.verifyAccountDeletedMessageIsVisible();
         await messagePage.clickContinueButton();
         await homePage.verifyHomePageIsVisible();
+
+    });
+
+    test("user should not be able to register with an existing email", async ({ page, homePage, navBarPage, registrationPage, messagePage, apiUtils }) => {
+
+        let userInfo = APITestDataUtils.generateRegisterUserPayload();
+        apiUtils.registerAccount(APITestDataUtils.convertToFormData(userInfo));
+
+        await page.goto("/");
+        await homePage.verifyHomePageIsVisible();
+        await navBarPage.navigateToSignupLogin();
+        await registrationPage.verifySectionHeaderIsVisible();
+        await registrationPage.signup(userInfo.name, userInfo.email);
+        await registrationPage.verifyErrorMessageIsVisible();
 
     });
 });
