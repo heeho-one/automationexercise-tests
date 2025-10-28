@@ -22,6 +22,8 @@ jobs:
       env:
         CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
         CURRENTS_PROJECT_ID: ${{ secrets.CURRENTS_PROJECT_ID }}
+        NEETO_PLAYDASH_PROJECT_ID: ${{ secrets.NEETO_PLAYDASH_PROJECT_ID }}
+        NEETO_PLAYDASH_API_KEY: ${{ secrets.NEETO_PLAYDASH_API_KEY }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
