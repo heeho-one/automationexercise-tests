@@ -1,3 +1,3 @@
 export class APIRoutes {
-    static registerUser = '/api/createAccount';
+  static registerUser = "/api/createAccount";
 }
